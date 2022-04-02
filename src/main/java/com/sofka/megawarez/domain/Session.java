@@ -1,5 +1,6 @@
 package com.sofka.megawarez.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public class Session implements Serializable {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ses_user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     /**

@@ -1,5 +1,6 @@
 package com.sofka.megawarez.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -62,5 +63,6 @@ public class Category implements Serializable {
             targetEntity = Subcategory.class,
             cascade = CascadeType.REMOVE,
             mappedBy = "category")
+    @JsonManagedReference
     private Set<Subcategory> subcategories = new LinkedHashSet<>();
 }

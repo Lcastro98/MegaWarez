@@ -1,5 +1,6 @@
 package com.sofka.megawarez.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -35,6 +36,7 @@ public class Download {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dwn_user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     /**

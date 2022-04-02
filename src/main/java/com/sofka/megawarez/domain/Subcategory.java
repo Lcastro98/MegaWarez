@@ -1,5 +1,7 @@
 package com.sofka.megawarez.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -49,6 +51,7 @@ public class Subcategory implements Serializable {
      */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Category.class, optional = false)
     @JoinColumn(name = "scat_category_id", nullable = false)
+    @JsonBackReference
     private Category category;
 
     /**
@@ -72,6 +75,7 @@ public class Subcategory implements Serializable {
             targetEntity = Item.class,
             cascade = CascadeType.REMOVE,
             mappedBy = "subcategory")
+    @JsonManagedReference
     private Set<Item> items = new LinkedHashSet<>();
 
 }

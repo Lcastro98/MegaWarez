@@ -1,5 +1,7 @@
 package com.sofka.megawarez.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -49,19 +51,20 @@ public class Item implements Serializable {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "itm_subcategory_id", nullable = false)
+    @JsonBackReference
     private Subcategory subcategory;
 
     /**
      * Nombre del item
      */
     @Column(name = "itm_name", nullable = false, length = 80)
-    private String itmName;
+    private String name;
 
     /**
      * Fecha y hora en que la tupla ha sido creada
      */
     @Column(name = "itm_created_at", nullable = false)
-    private Instant itmCreatedAt;
+    private Instant createdAt;
 
     /**
      * Punto de enlace entre la entidad de la item y descarga
@@ -72,6 +75,7 @@ public class Item implements Serializable {
             targetEntity = Download.class,
             cascade = CascadeType.REMOVE,
             mappedBy = "item")
+    @JsonManagedReference
     private Set<Download> downloads = new LinkedHashSet<>();
 
 }
