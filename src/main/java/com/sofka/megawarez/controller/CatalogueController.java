@@ -1,6 +1,7 @@
 package com.sofka.megawarez.controller;
 
 import com.sofka.megawarez.domain.Category;
+import com.sofka.megawarez.domain.Download;
 import com.sofka.megawarez.domain.Item;
 import com.sofka.megawarez.domain.Subcategory;
 import com.sofka.megawarez.service.CatalogueService;
@@ -161,6 +162,37 @@ public class CatalogueController {
         response.restart();
         try {
             response.data = catalogueService.getList(orderBy, order);
+            httpStatus = HttpStatus.OK;
+        } catch (Exception exception) {
+            getErrorMessageInternal(exception);
+        }
+        return new ResponseEntity(response, httpStatus);
+    }
+
+    @PostMapping(path = "/api/v1/descarga/{userId}/{itemId}")
+    public ResponseEntity<Response> createdownload(@RequestBody Download download) {
+        response.restart();
+        {
+            try {
+                log.info("Descarga a crear: {}", download);
+                response.data = catalogueService.createDownload(download);
+                httpStatus = HttpStatus.CREATED;
+            } catch (DataAccessException exception) {
+                getErrorMessageForResponse(exception);
+            } catch (Exception exception) {
+                getErrorMessageInternal(exception);
+            }
+            return new ResponseEntity(response, httpStatus);
+        }
+    }
+
+    @GetMapping(path = "/api/v1/descarga/{itemId}")
+    public ResponseEntity<Response> userByItem(
+            @PathVariable(value="itemId") Item itemId
+    ) {
+        response.restart();
+        try {
+            response.data = catalogueService.getList(itemId);
             httpStatus = HttpStatus.OK;
         } catch (Exception exception) {
             getErrorMessageInternal(exception);

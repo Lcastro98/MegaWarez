@@ -44,5 +44,5 @@ public interface DownloadRepository extends JpaRepository<Download, Integer> {
     @Query(value = "SELECT dwn " +
             "FROM Download dwn " +
             "WHERE dwn.item = :item")
-    public List<Download> findAllByUser(@Param(value = "item") Item item);
+    public List<Download> findAllByItem(@Param(value = "item") Item item);
 }

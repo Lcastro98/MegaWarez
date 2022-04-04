@@ -1,9 +1,8 @@
 package com.sofka.megawarez.service.interfaces;
 
-import com.sofka.megawarez.domain.Category;
-import com.sofka.megawarez.domain.Item;
-import com.sofka.megawarez.domain.Subcategory;
+import com.sofka.megawarez.domain.*;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,6 +52,12 @@ public interface ICatalogue {
      * @since 1.0.0
      */
     public List<Item> getList(String category, String subcategory, String field, Sort.Direction order);
+
+    public List<Item> getList(Integer id);
+
+    public List<Download> getList(Item item);
+
+    public Download createDownload(Download download);
 
     /**
      * Crea una categoría en el sistema

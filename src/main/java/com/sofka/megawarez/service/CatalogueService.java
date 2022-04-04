@@ -1,11 +1,10 @@
 package com.sofka.megawarez.service;
 
-import com.sofka.megawarez.domain.Category;
-import com.sofka.megawarez.domain.Item;
-import com.sofka.megawarez.domain.Subcategory;
+import com.sofka.megawarez.domain.*;
 import com.sofka.megawarez.repository.CategoryRepository;
 import com.sofka.megawarez.repository.ItemRepository;
 import com.sofka.megawarez.repository.SubcategoryRepository;
+import com.sofka.megawarez.repository.DownloadRepository;
 import com.sofka.megawarez.service.interfaces.ICatalogue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -42,6 +41,12 @@ public class CatalogueService implements ICatalogue {
      */
     @Autowired
     private ItemRepository itemRepository;
+
+    /**
+     * Repositorio de Descarga
+     */
+    @Autowired
+    private DownloadRepository downloadRepository;
 
     /**
      * Devuelve una lista de Item con todos los items del sistema
@@ -90,6 +95,25 @@ public class CatalogueService implements ICatalogue {
     @Transactional(readOnly = true)
     public List<Item> getList(String category, String subcategory, String field, Sort.Direction order) {
         return itemRepository.findAll(Sort.by(order, field));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Item> getList(Integer id) {
+        return itemRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Download> getList(Item item) {
+        return downloadRepository.findAllByItem(item);
+    }
+
+    @Override
+    @Transactional
+    public Download createDownload(Download download) {
+        download.setCreatedAt(Instant.now());
+        return downloadRepository.save(download);
     }
 
     /**
