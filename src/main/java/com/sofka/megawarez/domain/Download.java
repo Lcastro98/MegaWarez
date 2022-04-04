@@ -34,7 +34,7 @@ public class Download {
      * Punto de enlace entre la entidad del Usuario y Descargas
      * (una usuario puede tener muchas descargas)
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, optional = false)
     @JoinColumn(name = "dwn_user_id", nullable = false)
     @JsonBackReference
     private User user;
@@ -43,8 +43,9 @@ public class Download {
      * Punto de enlace entre la entidad de la item y descarga
      * (un item puede tener muchas descargas)
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class, optional = false)
     @JoinColumn(name = "dwn_item_id", nullable = false)
+    @JsonBackReference
     private Item item;
 
     /**

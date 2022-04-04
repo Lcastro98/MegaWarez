@@ -1,5 +1,6 @@
 package com.sofka.megawarez.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -87,7 +88,7 @@ public class User implements Serializable {
             targetEntity = Session.class,
             cascade = CascadeType.REMOVE,
             mappedBy = "user")
-    @JsonManagedReference
+    @JsonIgnore
     private Set<Session> sessions = new LinkedHashSet<>();
 
 }

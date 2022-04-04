@@ -44,7 +44,7 @@ public class Session implements Serializable {
      * Punto de enlace entre la entidad del Usuario y Sesion
      * (un usuario puede tener muchas sesiones)
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, optional = false)
     @JoinColumn(name = "ses_user_id", nullable = false)
     @JsonBackReference
     private User user;

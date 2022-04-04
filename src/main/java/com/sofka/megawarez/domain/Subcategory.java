@@ -1,8 +1,12 @@
 package com.sofka.megawarez.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Setter;
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +31,11 @@ import java.util.Set;
  * @author Lorena Castro <Lcastro0398@gmail.com>
  * @since 1.0.0
  */
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "subcategory")
 public class Subcategory implements Serializable {
@@ -75,7 +83,7 @@ public class Subcategory implements Serializable {
             targetEntity = Item.class,
             cascade = CascadeType.REMOVE,
             mappedBy = "subcategory")
-    @JsonManagedReference
+    @JsonIgnore
     private Set<Item> items = new LinkedHashSet<>();
 
 }
