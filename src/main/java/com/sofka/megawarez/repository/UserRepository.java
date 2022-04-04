@@ -1,9 +1,9 @@
 package com.sofka.megawarez.repository;
 
 import com.sofka.megawarez.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
  * @author Lorena Castro <Lcastro0398@gmail.com>
  * @since 1.0.0
  */
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     /**
      * Actualiza el nombre de un usuario

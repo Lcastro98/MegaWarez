@@ -2,9 +2,9 @@ package com.sofka.megawarez.repository;
 
 import com.sofka.megawarez.domain.Item;
 import com.sofka.megawarez.domain.Subcategory;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author Lorena Castro <Lcastro0398@gmail.com>
  * @since 1.0.0
  */
-public interface ItemRepository extends CrudRepository<Item, Integer> {
+public interface ItemRepository extends JpaRepository<Item, Integer> {
 
     /**
      * Busca los items que empiezan por X dato
