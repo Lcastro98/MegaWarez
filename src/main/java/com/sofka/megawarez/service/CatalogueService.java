@@ -60,6 +60,25 @@ public class CatalogueService implements ICatalogue {
     /**
      * Devuelve una lista de Item con todos los items ordenados por el campo indicado ya sea ascendente o descendente
      *
+     * @param field campo por el cual ordenar (name o createAt)
+     * @param order método para ordenar (ACS o DESC)
+     * @return Lista de items
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Item> getList(String field, Sort.Direction order) {
+        return itemRepository.findAll(Sort.by(order, field));
+    }
+
+    /**
+     * Devuelve una lista de Item con todos los items de una subcategoría específica
+     * ordenados por el campo indicado ya sea ascendente o descendente
+     *
+     * @param category categoría a la que pertenece la subcategoría
+     * @param subcategory subcategoría a ordenar
      * @param field campo por el cual ordenar
      * @param order método para ordenar ACS o DESC
      * @return Lista de items
@@ -69,7 +88,7 @@ public class CatalogueService implements ICatalogue {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Item> getList(String field, Sort.Direction order) {
+    public List<Item> getList(String category, String subcategory, String field, Sort.Direction order) {
         return itemRepository.findAll(Sort.by(order, field));
     }
 

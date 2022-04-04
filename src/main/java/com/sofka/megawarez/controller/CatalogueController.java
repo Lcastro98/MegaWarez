@@ -115,10 +115,39 @@ public class CatalogueController {
     }
 
     /**
+     * Devuelve todos los items ordenados por nombre de forma ascendente o descendente
+     *
+     * @param category
+     * @param subcategory
+     * @param orderBy Nombre del campo por donde se desea ordenar la información (name o createdAt)
+     * @param order Tipo de orden que debe tener la información (ASC o DESC)
+     * @return Objeto Response en formato JSON
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
+    @GetMapping(path = "/api/v1/{category}/{subcategory}/orderby/{orderBy}/{order}")
+    public ResponseEntity<Response> itemsOrderBy(
+            @PathVariable(value="category") String category,
+            @PathVariable(value="subcategory") String subcategory,
+            @PathVariable(value="orderBy") String orderBy,
+            @PathVariable(value="order") Sort.Direction order
+    ) {
+        response.restart();
+        try {
+            response.data = catalogueService.getList(orderBy, order);
+            httpStatus = HttpStatus.OK;
+        } catch (Exception exception) {
+            getErrorMessageInternal(exception);
+        }
+        return new ResponseEntity(response, httpStatus);
+    }
+
+    /**
      * Devuelve los items ordenados por nombre de forma ascendente o descendente
      *
-     * @param orderBy Nombre del campo por donde se desea ordenar la información
-     * @param order Tipo de orden que debe tener la información ASC o DESC
+     * @param orderBy Nombre del campo por donde se desea ordenar la información (name o createdAt)
+     * @param order Tipo de orden que debe tener la información (ASC o DESC)
      * @return Objeto Response en formato JSON
      *
      * @author Lorena Castro <Lcastro0398@gmail.com>

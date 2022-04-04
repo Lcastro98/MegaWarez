@@ -28,7 +28,7 @@ public interface ICatalogue {
 
     /**
      * Devuelve una lista de Item con todos los items del sistema ordenados por el campo indicado
-     * (nombre) ya sea ascendente o descentente
+     * (name o createdAt) ya sea ascendente o descentente
      *
      * @param field campo por el cual ordenar
      * @param order método para ordenar ACS o DESC
@@ -38,6 +38,21 @@ public interface ICatalogue {
      * @since 1.0.0
      */
     public List<Item> getList(String field, Sort.Direction order);
+
+    /**
+     * Devuelve una lista de Item con los items de una subcategoría ordenados por el campo indicado
+     * (name o createdAt) ya sea ascendente o descentente
+     *
+     * @param category categoría a la que pertenece la subcategoría
+     * @param subcategory subcategoría a ordenar
+     * @param field campo por el cual ordenar
+     * @param order método para ordenar ACS o DESC
+     * @return Lista de items
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
+    public List<Item> getList(String category, String subcategory, String field, Sort.Direction order);
 
     /**
      * Crea una categoría en el sistema
