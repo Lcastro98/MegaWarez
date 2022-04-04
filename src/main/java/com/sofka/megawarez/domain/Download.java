@@ -1,7 +1,11 @@
 package com.sofka.megawarez.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
+import lombok.Setter;
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +25,11 @@ import java.time.Instant;
  * @author Lorena Castro <Lcastro0398@gmail.com>
  * @since 1.0.0
  */
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "download")
 public class Download {
@@ -36,7 +44,7 @@ public class Download {
      */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, optional = false)
     @JoinColumn(name = "dwn_user_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "userRef")
     private User user;
 
     /**
@@ -45,13 +53,13 @@ public class Download {
      */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class, optional = false)
     @JoinColumn(name = "dwn_item_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "itemRef")
     private Item item;
 
     /**
      * Fecha y hora en que la tupla ha sido creada
      */
     @Column(name = "dwn_created_at", nullable = false)
-    private Instant dwnCreatedAt;
+    private Instant CreatedAt;
 
 }

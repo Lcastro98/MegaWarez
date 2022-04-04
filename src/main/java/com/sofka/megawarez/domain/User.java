@@ -1,8 +1,11 @@
 package com.sofka.megawarez.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import lombok.Setter;
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +28,11 @@ import java.util.Set;
  * @author Lorena Castro <Lcastro0398@gmail.com>
  * @since 1.0.0
  */
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -76,7 +83,7 @@ public class User implements Serializable {
             targetEntity = Download.class,
             cascade = CascadeType.REMOVE,
             mappedBy = "user")
-    @JsonManagedReference
+    @JsonIgnore
     private Set<Download> downloads = new LinkedHashSet<>();
 
     /**
