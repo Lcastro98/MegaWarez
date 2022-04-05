@@ -1,6 +1,9 @@
 package com.sofka.megawarez.service;
 
-import com.sofka.megawarez.domain.*;
+import com.sofka.megawarez.domain.Category;
+import com.sofka.megawarez.domain.Subcategory;
+import com.sofka.megawarez.domain.Item;
+import com.sofka.megawarez.domain.Download;
 import com.sofka.megawarez.repository.CategoryRepository;
 import com.sofka.megawarez.repository.ItemRepository;
 import com.sofka.megawarez.repository.SubcategoryRepository;
@@ -97,18 +100,45 @@ public class CatalogueService implements ICatalogue {
         return itemRepository.findAll(Sort.by(order, field));
     }
 
+    /**
+     * Devuelve una lista de Item
+     *
+     * @param id
+     * @return Lista de items
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Item> getList(Integer id) {
         return itemRepository.findAll();
     }
 
+    /**
+     * Devuelve una lista de descargas
+     *
+     * @param item
+     * @return
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Download> getList(Item item) {
         return downloadRepository.findAllByItem(item);
     }
 
+    /**
+     * Crea una descarga en el sistema
+     *
+     * @param download Objeto de la categoria a crear
+     * @return Objeto de la descarga creada
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
     @Override
     @Transactional
     public Download createDownload(Download download) {

@@ -73,7 +73,7 @@ public class CatalogueController {
      * @param httpResponse Objeto HttpServletResponse usado para redireccionar el controlador
      * @return Objeto Response en formato JSON
      *
-     * @author Julian Lasso <julian.lasso@sofka.com.co>
+     * @author Lorena Castro <Lcastro0398@gmail.com>
      * @since 1.0.0
      */
     @GetMapping(path = "/api/")
@@ -169,6 +169,15 @@ public class CatalogueController {
         return new ResponseEntity(response, httpStatus);
     }
 
+    /**
+     * Crea una descarga en el sistema
+     *
+     * @param download objeto Download a crear
+     * @return Objeto response en fromato json
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
     @PostMapping(path = "/api/v1/descarga/{userId}/{itemId}")
     public ResponseEntity<Response> createdownload(@RequestBody Download download) {
         response.restart();
@@ -186,6 +195,15 @@ public class CatalogueController {
         }
     }
 
+    /**
+     * Devuelve las descargas de un item específico
+     *
+     * @param itemId
+     * @return
+     *
+     * @author Lorena Castro <Lcastro0398@gmail.com>
+     * @since 1.0.0
+     */
     @GetMapping(path = "/api/v1/descarga/{itemId}")
     public ResponseEntity<Response> userByItem(
             @PathVariable(value="itemId") Item itemId
